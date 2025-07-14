@@ -12,6 +12,7 @@ class UserBase(BaseModel):
 
 class UserCreate(UserBase):
     password: str
+    winrate: float = 0.0
 
 
 class UserLogin(BaseModel):
@@ -25,7 +26,7 @@ class UserUpdate(BaseModel):
 
 class UserRead(UserBase):
     user_id: int
-    winrate: float = 0.0
+    winrate: float
 
     class Config:
         orm_mode = True
