@@ -4,7 +4,7 @@ from sqlalchemy import and_
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
-from . import models, schemas
+import models, schemas
 
 
 # User CRUD

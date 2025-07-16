@@ -29,7 +29,7 @@ class UserRead(UserBase):
     winrate: float
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # Record Schemas
@@ -48,7 +48,7 @@ class RecordRead(RecordBase):
     updated_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 # Board Schemas
@@ -73,4 +73,4 @@ class BoardRead(BaseModel):
     updated_at: datetime
     
     class Config:
-        orm_mode = True
+        from_attributes = True
