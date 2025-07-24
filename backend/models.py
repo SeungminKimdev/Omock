@@ -12,9 +12,9 @@ class User(Base):
     name = Column(String, nullable=False)
     winrate = Column(Float, default=0.0)
     
-    records_p1 = relationship('Record', foreign_keys='Record.player1', back_populates='user')
-    records_p2 = relationship('Record', foreign_keys='Record.player2', back_populates='user')
-    records_winner = relationship('Record', foreign_keys='Record.winner', back_populates='user')
+    records_p1 = relationship('Record', foreign_keys='Record.player1', back_populates='player1_user')
+    records_p2 = relationship('Record', foreign_keys='Record.player2', back_populates='player2_user')
+    records_winner = relationship('Record', foreign_keys='Record.winner', back_populates='winner_user')
     boards = relationship('Board', back_populates='user')
 
 
@@ -28,7 +28,7 @@ class Record(Base):
     updated_at = Column(DateTime, nullable=False)
     
     player1_user = relationship('User', back_populates='records_p1', foreign_keys=[player1])
-    player2_user2 = relationship('User', back_populates='records_p2', foreign_keys=[player2])
+    player2_user = relationship('User', back_populates='records_p2', foreign_keys=[player2])
     winner_user = relationship('User', back_populates='records_winner', foreign_keys=[winner])
 
 

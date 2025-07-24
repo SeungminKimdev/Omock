@@ -26,13 +26,16 @@ def create_user(db: Session, user: schemas.UserCreate) -> models.User:
         raise e
     return db_user
 
-def get_user_by_id(db: Session, user_id: int) -> models.User:
+def get_user_by_id(db: Session, id: str) -> models.User:
+    return db.query(models.User).filter(models.User.id == id).first()
+
+def get_user_by_user_id(db: Session, user_id: int) -> models.User:
     return db.query(models.User).filter(models.User.user_id == user_id).first()
 
-def update_user(db:Session, user_id: int, user_update: schemas.UserUpdate) -> models.User:
-    db_user = get_user_by_id(db, user_id)
+def update_user(db:Session, id: str, user_update: schemas.UserUpdate) -> models.User:
+    db_user = get_user_by_id(db, id)
     if not db_user:
-        raise ValueError(f"User with id {user_id} does not exist.")
+        raise ValueError(f"User with id {id} does not exist.")
     
     if user_update.name:
         db_user.name = user_update.name
@@ -45,10 +48,10 @@ def update_user(db:Session, user_id: int, user_update: schemas.UserUpdate) -> mo
         raise e
     return db_user
 
-def delete_user(db: Session, user_id: int) -> None:
-    db_user = get_user_by_id(db, user_id)
+def delete_user(db: Session, id: str) -> None:
+    db_user = get_user_by_id(db, id)
     if not db_user:
-        raise ValueError(f"User with id {user_id} does not exist.")
+        raise ValueError(f"User with id {id} does not exist.")
     
     db.delete(db_user)
     try:

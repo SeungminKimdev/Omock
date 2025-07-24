@@ -10,23 +10,23 @@ from models import User
 router = APIRouter()
 
 # 유저 생성
-@router.post("/users", status_code=201)
+@router.post("/register", status_code=201)
 async def create_user_endpoint(request: Request, db: Session = Depends(get_db)):
     try:
         user_data = await request.json()
         user_data['password'] = get_password_hash(user_data['password'])
         user = UserCreate(**user_data)
     except Exception as e:
-        return
+        return JSONResponse(status_code=400, content={"errorMessage": "Invalid request data", "error": str(e)})
     
     try:
         db_user = create_user(db, user)
         return JSONResponse(status_code=201, content={"message": "User created success", "user_id": db_user.user_id})
     except ValueError as e:
-        return
+        return JSONResponse(status_code=400, content={"errorMessage": str(e)})
 
 # 로그인
-@router.post("/users/login")
+@router.post("/login")
 async def login(request: Request, db: Session = Depends(get_db)):
     try:
         login_data = await request.json()
