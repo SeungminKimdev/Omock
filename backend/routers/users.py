@@ -1,11 +1,13 @@
-from fastapi import APIRouter, Request, Depends
-from fastapi.responses import JSONResponse
-from sqlalchemy.orm import Session
-from database import get_db
-from core.security import verify_password, create_access_token, get_password_hash
+from core.security import (create_access_token, get_password_hash,
+                           verify_password)
 from crud import create_user
-from schemas import UserCreate
+from database import get_db
+from fastapi import APIRouter, Depends, Request
+from fastapi.responses import JSONResponse
 from models import User
+from schemas import UserCreate
+from sqlalchemy.orm import Session
+
 
 router = APIRouter()
 
