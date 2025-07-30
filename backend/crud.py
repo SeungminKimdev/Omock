@@ -32,6 +32,12 @@ def get_user_by_id(db: Session, id: str) -> models.User:
 def get_user_by_user_id(db: Session, user_id: int) -> models.User:
     return db.query(models.User).filter(models.User.user_id == user_id).first()
 
+def get_user_by_name(db: Session, name: str) -> models.User:
+    user = db.query(models.User).filter(models.User.name == name).first()
+    if user:
+        return user
+    raise ValueError(f"User with name {name} does not exist.")
+
 def update_user(db:Session, id: str, user_update: schemas.UserUpdate) -> models.User:
     db_user = get_user_by_id(db, id)
     if not db_user:
@@ -76,6 +82,7 @@ def create_record(db: Session, record: schemas.RecordCreate) -> models.Record:
     except SQLAlchemyError as e:
         db.rollback()
         raise e
+    return db_record
 
 def get_record_by_userId(db: Session, user_id: int) -> list[models.Record]:
     return db.query(models.Record).filter(
