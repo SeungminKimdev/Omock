@@ -1,0 +1,61 @@
+:root{
+  --bg: linear-gradient(135deg,#0b1f3a 0%, #0e2a52 50%, #133462 100%);
+  --panel: rgba(255,255,255,0.08);
+  --panel-border: rgba(255,255,255,0.22);
+  --accent: #5daaff;
+  --accent-2: #8cc4ff;
+  --btn: #1f6fe0;
+  --btn-hover: #2b7ef2;
+  --grid: rgba(255,255,255,0.28);
+  --grid-strong: rgba(255,255,255,0.5);
+  --shadow-1: 0 10px 30px rgba(0,0,0,0.35);
+  --shadow-2: 0 6px 18px rgba(0,0,0,0.28);
+  --win: #6be2ff;
+}
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial;
+  color:#eaf2ff; background: var(--bg);
+  display:grid; place-items:center;
+}
+.app{ width:min(1200px, 96vw); padding:clamp(14px,2vw,22px); display:grid; gap:clamp(14px,1.8vw,22px); grid-template-columns: 1fr; }
+header{ display:flex; align-items:center; justify-content:space-between; gap:12px; background: var(--panel); border:1px solid var(--panel-border); border-radius:16px; padding:12px 14px; box-shadow: var(--shadow-2); backdrop-filter: blur(10px); }
+.brand{ display:flex; align-items:center; gap:12px; white-space:nowrap; }
+.logo{ width:36px; height:36px; border-radius:10px; background: radial-gradient(60% 60% at 35% 30%, #9fd1ff88, transparent 60%), linear-gradient(145deg,#1b66c9,#2f86ff); box-shadow: inset 0 0 0 1px #ffffff40, 0 6px 16px #00000040; }
+h1{font-size:18px; margin:0; letter-spacing:0.4px; font-weight:700}
+.sub{opacity:0.8; font-size:12px}
+
+.controls{ display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:flex-end; }
+.side .controls{ justify-content:flex-start; }            /* 사이드 패널에서 좌측 정렬 */
+.controls .status-text{ font-size:12px; opacity:.9 }      /* 상태 텍스트(선택 사용) */
+.controls .sep{ opacity:.4; margin:0 8px }                /* 구분선(선택 사용) */
+
+button{ appearance:none; cursor:pointer; border:none; border-radius:12px; padding:10px 14px; font-weight:600; color:#fff; background: linear-gradient(180deg,var(--btn), #1152b8); box-shadow: 0 6px 14px rgba(16,86,200,0.45), inset 0 1px 0 #ffffff30; transition: transform .15s ease, box-shadow .2s ease, background .2s ease; }
+button:hover{ background: linear-gradient(180deg,var(--btn-hover), #1b62d4); transform: translateY(-1px) }
+button:active{ transform: translateY(0); box-shadow: 0 4px 10px rgba(16,86,200,0.35) }
+.pill{ padding:10px 12px; min-width:44px; text-align:center; background: var(--panel); border:1px solid var(--panel-border); border-radius:999px; box-shadow: var(--shadow-2); }
+
+.board-wrap{ display:grid; grid-template-columns: 1fr 300px; gap:clamp(12px,2vw,20px); }
+@media (max-width: 900px){ .board-wrap{grid-template-columns: 1fr} }
+
+.canvas-card, .side{ background: var(--panel); border:1px solid var(--panel-border); border-radius:18px; box-shadow: var(--shadow-1); backdrop-filter: blur(12px); }
+.canvas-card{ position:relative; aspect-ratio:1/1; overflow:hidden; }
+canvas{ width:100%; height:100%; display:block; }
+
+.overlay{ position:absolute; inset:0; display:grid; place-items:center; pointer-events:none; }
+.banner{ padding:16px 22px; border-radius:14px; background: linear-gradient(180deg,#0f2d5f,#0b244c); border:1px solid #ffffff30; box-shadow: var(--shadow-1); text-align:center; min-width:60%; }
+.banner h2{ margin:0 0 8px; font-size:20px }
+.banner p{ margin:0; opacity:0.85 }
+
+.side{ padding:14px; display:flex; flex-direction:column; gap:14px; min-height:220px; }
+.row{display:flex; align-items:center; justify-content:space-between; gap:10px}
+.legend{display:flex; align-items:center; gap:10px}
+.stone-demo{ width:18px; height:18px; border-radius:50%; box-shadow: inset 0 3px 6px #00000055, inset 0 -1px 2px #ffffff40, 0 1px 2px #00000050; }
+.stone-b{ background: radial-gradient(circle at 35% 30%, #3f3f3f, #0b0b0b); }
+.stone-w{ background: radial-gradient(circle at 35% 30%, #ffffff, #cfd8ea); }
+.hint{ font-size:12px; opacity:0.85 }
+.kbd{ padding:2px 6px; border-radius:6px; border:1px solid #ffffff40; background: #0f274b; font-size:11px; }
+footer{ opacity:0.75; text-align:center; font-size:12px }
+
+.overlay[hidden]{ display: none !important; }
